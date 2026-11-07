@@ -1,0 +1,1133 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111820">
+  <title>Kl San't — Portfólio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --text: #e7edf3;
+      --muted: #a1adba;
+      --soft: #758493;
+      --green: #9ac7a8;
+      --blue: #91b8e8;
+      --purple: #b2a4dc;
+      --amber: #d9bd89;
+      --line: rgba(225, 238, 250, .12);
+      --panel: rgba(17, 27, 39, .36);
+      --panel-hover: rgba(23, 36, 49, .49);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #111820;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background: rgba(145, 184, 232, .3);
+      color: white;
+    }
+
+    /* Fundo */
+
+    .background-video {
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: .65;
+    }
+
+    .background-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        linear-gradient(
+          115deg,
+          rgba(13, 21, 29, .58),
+          rgba(15, 25, 35, .38) 55%,
+          rgba(13, 20, 29, .55)
+        );
+    }
+
+    .background-overlay::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        circle at 50% 35%,
+        transparent 0%,
+        rgba(9, 15, 22, .25) 100%
+      );
+    }
+
+    .ambient {
+      position: fixed;
+      z-index: -1;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      filter: blur(110px);
+      opacity: .12;
+      pointer-events: none;
+    }
+
+    .ambient.one {
+      top: 10%;
+      left: -160px;
+      background: #6eaa91;
+    }
+
+    .ambient.two {
+      right: -150px;
+      top: 45%;
+      background: #638fc0;
+    }
+
+    /* Navegação */
+
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 20;
+      padding: 13px 22px;
+      display: flex;
+      justify-content: center;
+      transition: transform .35s ease, opacity .35s ease;
+    }
+
+    .topbar.hidden {
+      transform: translateY(-110%);
+      opacity: 0;
+    }
+
+    .nav {
+      width: min(100%, 940px);
+      min-height: 47px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      border: 1px solid rgba(230, 240, 250, .12);
+      border-radius: 13px;
+      background: rgba(15, 24, 33, .55);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, .12);
+    }
+
+    .nav-brand {
+      color: #e4edf5;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: -.4px;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 23px;
+    }
+
+    .nav-links a {
+      color: #aab6c3;
+      font-size: 11px;
+      text-decoration: none;
+      transition: color .2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #e5edf5;
+    }
+
+    /* Estrutura */
+
+    .container {
+      width: min(100% - 36px, 880px);
+      margin: auto;
+    }
+
+    main {
+      padding-top: 112px;
+      padding-bottom: 35px;
+    }
+
+    .panel {
+      position: relative;
+      overflow: hidden;
+      background: var(--panel);
+      border: 1px solid rgba(220, 235, 255, .10);
+      border-radius: 15px;
+      backdrop-filter: blur(17px) saturate(115%);
+      -webkit-backdrop-filter: blur(17px) saturate(115%);
+      box-shadow:
+        0 12px 35px rgba(0, 0, 0, .10),
+        inset 0 1px 0 rgba(255, 255, 255, .055);
+      transition:
+        transform .25s ease,
+        background .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
+    }
+
+    .panel:hover {
+      transform: translateY(-3px);
+      background: var(--panel-hover);
+      border-color: rgba(220, 235, 255, .19);
+      box-shadow: 0 16px 35px rgba(0, 0, 0, .16);
+    }
+
+    /* Apresentação */
+
+    .hero {
+      display: grid;
+      grid-template-columns: 185px 1fr;
+      gap: 28px;
+      align-items: center;
+      padding: 25px;
+      margin-bottom: 34px;
+      animation: enter .7s ease both;
+    }
+
+    .profile-photo {
+      width: 185px;
+      height: 205px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid rgba(230, 240, 250, .15);
+      filter: saturate(.85);
+      transition: filter .3s ease, transform .3s ease;
+    }
+
+    .profile-photo:hover {
+      filter: saturate(1.05);
+      transform: scale(1.015);
+    }
+
+    .hero-content {
+      min-width: 0;
+    }
+
+    .availability {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 15px;
+      color: #a9c8b2;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .5px;
+    }
+
+    .availability::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #8fc6a0;
+      box-shadow: 0 0 10px rgba(143, 198, 160, .5);
+    }
+
+    .hero h1 {
+      font-size: clamp(29px, 5vw, 43px);
+      line-height: 1.1;
+      letter-spacing: -2px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .hero h1 span {
+      color: #a8c2d9;
+    }
+
+    .hero-description {
+      max-width: 470px;
+      color: #b0bdc9;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 19px;
+    }
+
+    .tag {
+      padding: 6px 10px;
+      color: #b9c7d4;
+      font-size: 10px;
+      border: 1px solid rgba(220, 235, 255, .12);
+      background: rgba(255, 255, 255, .035);
+      border-radius: 6px;
+    }
+
+    /* Secções */
+
+    .section {
+      margin-bottom: 31px;
+      animation: enter .7s ease both;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 13px 1px;
+    }
+
+    .section-heading h2 {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: -.2px;
+    }
+
+    .section-heading::after {
+      content: "";
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(
+        90deg,
+        rgba(220, 235, 255, .17),
+        transparent
+      );
+    }
+
+    .section-icon {
+      width: 25px;
+      height: 25px;
+      display: grid;
+      place-items: center;
+      border-radius: 7px;
+      font-size: 12px;
+      background: rgba(255, 255, 255, .055);
+      border: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .content-card {
+      padding: 19px;
+      min-width: 0;
+    }
+
+    .content-card h3 {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 9px;
+    }
+
+    .content-card p {
+      color: #aebbc8;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .card-green {
+      border-top: 2px solid rgba(154, 199, 168, .65);
+    }
+
+    .card-blue {
+      border-top: 2px solid rgba(145, 184, 232, .65);
+    }
+
+    .card-purple {
+      border-top: 2px solid rgba(178, 164, 220, .65);
+    }
+
+    .card-amber {
+      border-top: 2px solid rgba(217, 189, 137, .65);
+    }
+
+    /* Características */
+
+    .traits {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .trait {
+      padding: 7px 11px;
+      border-radius: 7px;
+      color: #c1d0dc;
+      background: rgba(255, 255, 255, .045);
+      border: 1px solid rgba(255, 255, 255, .08);
+      font-size: 11px;
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    .trait:hover {
+      background: rgba(255, 255, 255, .09);
+      transform: translateY(-2px);
+    }
+
+    /* Listas */
+
+    .interest-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 13px;
+    }
+
+    .interest {
+      padding: 8px 11px;
+      border-radius: 7px;
+      background: rgba(255, 255, 255, .045);
+      border: 1px solid rgba(255, 255, 255, .08);
+      color: #c4cfda;
+      font-size: 11px;
+      transition: .2s ease;
+    }
+
+    .interest:hover {
+      background: rgba(255, 255, 255, .09);
+      border-color: rgba(255, 255, 255, .16);
+      transform: translateY(-2px);
+    }
+
+    /* Frases */
+
+    .quotes {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .quote-card {
+      padding: 21px;
+      min-height: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .quote-card p {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -.4px;
+      line-height: 1.5;
+    }
+
+    .quote-card:first-child p {
+      color: #b8d4c0;
+    }
+
+    .quote-card:last-child p {
+      color: #b3c9e4;
+    }
+
+    /* Música */
+
+    .music-player {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 17px;
+    }
+
+    .music-button {
+      width: 42px;
+      height: 42px;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(220, 235, 255, .15);
+      border-radius: 50%;
+      color: #dce8f1;
+      background: rgba(255, 255, 255, .07);
+      cursor: pointer;
+      font-size: 15px;
+      transition: .2s ease;
+    }
+
+    .music-button:hover {
+      background: rgba(255, 255, 255, .14);
+      transform: scale(1.06);
+    }
+
+    .music-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .music-info h3 {
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .music-info p {
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    .equalizer {
+      height: 25px;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      margin-left: auto;
+    }
+
+    .equalizer span {
+      width: 3px;
+      height: 5px;
+      border-radius: 4px;
+      background: #9bb8d4;
+    }
+
+    .equalizer.playing span {
+      animation: equalize .7s ease-in-out infinite alternate;
+    }
+
+    .equalizer span:nth-child(2) { animation-delay: .15s; }
+    .equalizer span:nth-child(3) { animation-delay: .3s; }
+    .equalizer span:nth-child(4) { animation-delay: .1s; }
+    .equalizer span:nth-child(5) { animation-delay: .25s; }
+
+    @keyframes equalize {
+      from { height: 5px; }
+      to { height: 22px; }
+    }
+
+    /* Redes */
+
+    .socials {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 11px;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 14px;
+      text-decoration: none;
+      color: var(--text);
+      transition: .2s ease;
+    }
+
+    .social-link:hover {
+      transform: translateY(-3px);
+      background: var(--panel-hover);
+    }
+
+    .social-icon {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      background: rgba(255, 255, 255, .07);
+      color: #c5d4e1;
+      font-size: 14px;
+    }
+
+    .social-text strong {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .social-text small {
+      display: block;
+      margin-top: 4px;
+      color: var(--soft);
+      font-size: 9px;
+    }
+
+    /* Rodapé */
+
+    footer {
+      padding: 13px 0 4px;
+      text-align: center;
+      color: rgba(190, 205, 218, .55);
+      font-size: 10px;
+    }
+
+    footer span {
+      color: #a8c4d9;
+    }
+
+    /* Animações */
+
+    @keyframes enter {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsividade */
+
+    @media (max-width: 650px) {
+      .topbar {
+        padding: 10px 12px;
+      }
+
+      .nav {
+        padding: 0 13px;
+      }
+
+      .nav-links {
+        gap: 12px;
+      }
+
+      .nav-links a {
+        font-size: 10px;
+      }
+
+      .container {
+        width: min(100% - 26px, 880px);
+      }
+
+      main {
+        padding-top: 88px;
+      }
+
+      .hero {
+        grid-template-columns: 115px 1fr;
+        gap: 17px;
+        padding: 16px;
+      }
+
+      .profile-photo {
+        width: 115px;
+        height: 145px;
+      }
+
+      .hero h1 {
+        font-size: 27px;
+        letter-spacing: -1.3px;
+      }
+
+      .hero-description {
+        font-size: 11px;
+        line-height: 1.6;
+      }
+
+      .availability {
+        font-size: 9px;
+        margin-bottom: 9px;
+      }
+
+      .hero-tags {
+        margin-top: 11px;
+        gap: 5px;
+      }
+
+      .tag {
+        font-size: 9px;
+        padding: 5px 7px;
+      }
+
+      .grid {
+        gap: 9px;
+      }
+
+      .content-card {
+        padding: 14px;
+      }
+
+      .content-card p {
+        font-size: 11px;
+      }
+
+      .socials {
+        gap: 8px;
+      }
+
+      .social-link {
+        padding: 11px 8px;
+        gap: 7px;
+      }
+
+      .social-icon {
+        width: 29px;
+        height: 29px;
+      }
+
+      .social-text strong {
+        font-size: 10px;
+      }
+
+      .social-text small {
+        font-size: 8px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .nav-links {
+        gap: 9px;
+      }
+
+      .nav-links a {
+        font-size: 9px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-photo {
+        width: 100%;
+        height: 210px;
+        object-position: center 35%;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      .quotes {
+        grid-template-columns: 1fr;
+      }
+
+      .socials {
+        grid-template-columns: 1fr;
+      }
+
+      .social-link {
+        padding: 12px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <video class="background-video" autoplay muted loop playsinline>
+    <source src="fundo.mp4" type="video/mp4">
+  </video>
+
+  <div class="background-overlay"></div>
+  <div class="ambient one"></div>
+  <div class="ambient two"></div>
+
+  <header class="topbar" id="topbar">
+    <nav class="nav">
+      <a href="#inicio" class="nav-brand">Kl San't</a>
+
+      <div class="nav-links">
+        <a href="#sobre">Sobre</a>
+        <a href="#estudos">Estudos</a>
+        <a href="#interesses">Interesses</a>
+        <a href="#musica">Música</a>
+        <a href="#redes">Redes</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container" id="inicio">
+
+    <!-- Apresentação -->
+
+    <section class="hero panel">
+      <img
+        src="foto.png"
+        alt="Minha fotografia"
+        class="profile-photo"
+      >
+
+      <div class="hero-content">
+        <div class="availability">Por aí, aprendendo coisas novas</div>
+
+        <h1>Kl <span>San't</span></h1>
+
+        <p class="hero-description">
+          Apenas alguém curioso, que gosta de tecnologia,
+          jogos e de descobrir como as coisas funcionam.
+          Atualmente aprendendo e explorando o mundo da programação.
+        </p>
+
+        <div class="hero-tags">
+          <span class="tag">Programação</span>
+          <span class="tag">Tecnologia</span>
+          <span class="tag">Games</span>
+          <span class="tag">Linux</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sobre -->
+
+    <section class="section reveal" id="sobre">
+      <div class="section-heading">
+        <span class="section-icon">◈</span>
+        <h2>Um pouco sobre mim</h2>
+      </div>
+
+      <div class="grid">
+        <article class="panel content-card card-green">
+          <h3>Quem sou</h3>
+          <p>
+            Sou alguém mais reservado, mas sempre curioso.
+            Gosto de aprender no meu próprio ritmo, explorar
+            ideias e entender melhor o funcionamento das coisas.
+          </p>
+        </article>
+
+        <article class="panel content-card card-blue">
+          <h3>Meu jeito</h3>
+          <p>
+            Não preciso estar sempre no centro das atenções.
+            Prefiro observar, aprender, experimentar e deixar
+            que as coisas aconteçam naturalmente.
+          </p>
+
+          <div class="traits">
+            <span class="trait">Curioso</span>
+            <span class="trait">Esforçado</span>
+            <span class="trait">Sonolento</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Estudos -->
+
+    <section class="section reveal" id="estudos">
+      <div class="section-heading">
+        <span class="section-icon">⌘</span>
+        <h2>O que estou estudando</h2>
+      </div>
+
+      <div class="grid">
+        <article class="panel content-card card-blue">
+          <h3>Desenvolvimento</h3>
+          <p>
+            Explorando o desenvolvimento web e a lógica por trás
+            dos programas. Ainda tenho muito a aprender, mas
+            cada experiência conta.
+          </p>
+
+          <div class="interest-list">
+            <span class="interest">HTML</span>
+            <span class="interest">CSS</span>
+            <span class="interest">JavaScript</span>
+            <span class="interest">Python</span>
+          </div>
+        </article>
+
+        <article class="panel content-card card-green">
+          <h3>Sistemas e redes</h3>
+          <p>
+            Aprendendo mais sobre sistemas operacionais,
+            redes de computadores, terminais e ferramentas
+            que fazem a tecnologia funcionar.
+          </p>
+
+          <div class="interest-list">
+            <span class="interest">Linux</span>
+            <span class="interest">Redes</span>
+            <span class="interest">Terminal</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Interesses -->
+
+    <section class="section reveal" id="interesses">
+      <div class="section-heading">
+        <span class="section-icon">◇</span>
+        <h2>Coisas que curto</h2>
+      </div>
+
+      <div class="grid">
+        <article class="panel content-card card-purple">
+          <h3>Animes</h3>
+          <p>
+            Algumas histórias e universos que gosto de acompanhar.
+          </p>
+
+          <div class="interest-list">
+            <span class="interest">Vinland Saga</span>
+            <span class="interest">Kuroko no Basket</span>
+            <span class="interest">Soul Eater</span>
+            <span class="interest">Death Note</span>
+          </div>
+        </article>
+
+        <article class="panel content-card card-amber">
+          <h3>Jogos</h3>
+          <p>
+            Um pouco de exploração, criatividade, competição
+            e algumas horas de distração.
+          </p>
+
+          <div class="interest-list">
+            <span class="interest">Minecraft</span>
+            <span class="interest">Roblox</span>
+            <span class="interest">Forza Horizon 6</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Frases -->
+
+    <section class="section reveal">
+      <div class="section-heading">
+        <span class="section-icon">〝</span>
+        <h2>Algumas palavras</h2>
+      </div>
+
+      <div class="quotes">
+        <article class="panel quote-card card-green">
+          <p>Vivo De Sa Lux</p>
+        </article>
+
+        <article class="panel quote-card card-blue">
+          <p>The control is an ilusion</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Música -->
+
+    <section class="section reveal" id="musica">
+      <div class="section-heading">
+        <span class="section-icon">♫</span>
+        <h2>O que costumo ouvir</h2>
+      </div>
+
+      <article class="panel music-player">
+        <button
+          class="music-button"
+          id="musicButton"
+          aria-label="Reproduzir música"
+          type="button"
+        >▶</button>
+
+        <div class="music-info">
+          <h3>Um pouco de música</h3>
+          <p>Lo-Fi · Rock · MPB · Jazz · Hardstyle · Clássica</p>
+        </div>
+
+        <div class="equalizer" id="equalizer">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <audio id="audio" src="musica.mp3" loop></audio>
+      </article>
+    </section>
+
+    <!-- Redes -->
+
+    <section class="section reveal" id="redes">
+      <div class="section-heading">
+        <span class="section-icon">↗</span>
+        <h2>Onde me encontrar</h2>
+      </div>
+
+      <div class="socials">
+        <a
+          class="panel social-link"
+          href="https://github.com/klsntdev"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="social-icon">⌘</span>
+          <span class="social-text">
+            <strong>GitHub</strong>
+            <small>Meus códigos</small>
+          </span>
+        </a>
+
+        <a
+          class="panel social-link"
+          href="https://discord.com/users/1566274750538453012"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="social-icon">◉</span>
+          <span class="social-text">
+            <strong>Discord</strong>
+            <small>Vamos conversar</small>
+          </span>
+        </a>
+
+        <a
+          class="panel social-link"
+          href="https://www.instagram.com/vivodesalux/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="social-icon">◎</span>
+          <span class="social-text">
+            <strong>Instagram</strong>
+            <small>Meu perfil</small>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      Feito por <span>Kl San't</span> · 2026
+    </footer>
+
+  </main>
+
+  <script>
+    // Navegação: esconde ao descer e mostra ao subir
+
+    const topbar = document.getElementById("topbar");
+    let lastScroll = window.scrollY;
+
+    window.addEventListener("scroll", () => {
+      const currentScroll = window.scrollY;
+
+      if (currentScroll < 80) {
+        topbar.classList.remove("hidden");
+      } else if (currentScroll > lastScroll) {
+        topbar.classList.add("hidden");
+      } else {
+        topbar.classList.remove("hidden");
+      }
+
+      lastScroll = currentScroll;
+    }, { passive: true });
+
+
+    // Player de música
+
+    const audio = document.getElementById("audio");
+    const musicButton = document.getElementById("musicButton");
+    const equalizer = document.getElementById("equalizer");
+
+    musicButton.addEventListener("click", async () => {
+      if (audio.paused) {
+        try {
+          await audio.play();
+          musicButton.textContent = "Ⅱ";
+          musicButton.setAttribute("aria-label", "Pausar música");
+          equalizer.classList.add("playing");
+        } catch (error) {
+          console.error("Não foi possível reproduzir o áudio:", error);
+        }
+      } else {
+        audio.pause();
+        musicButton.textContent = "▶";
+        musicButton.setAttribute("aria-label", "Reproduzir música");
+        equalizer.classList.remove("playing");
+      }
+    });
+
+    audio.addEventListener("ended", () => {
+      musicButton.textContent = "▶";
+      equalizer.classList.remove("playing");
+    });
+
+
+    // Animação das secções ao aparecerem no ecrã
+
+    const revealElements = document.querySelectorAll(".reveal");
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12
+    });
+
+    revealElements.forEach(element => {
+      observer.observe(element);
+    });
+
+
+    // Link activo na navegação
+
+    const sections = document.querySelectorAll("main section[id]");
+    const navLinks = document.querySelectorAll(".nav-links a");
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => {
+            link.classList.toggle(
+              "active",
+              link.getAttribute("href") === "#" + entry.target.id
+            );
+          });
+        }
+      });
+    }, {
+      rootMargin: "-35% 0px -55% 0px"
+    });
+
+    sections.forEach(section => {
+      sectionObserver.observe(section);
+    });
+  </script>
+
+</body>
+</html>
